@@ -5,6 +5,7 @@
 //  Created by Edwin on 4/30/24.
 //
 
+import StoreKit
 import PhotosUI
 import SwiftUI
 import CoreImage
@@ -19,6 +20,9 @@ struct ContentView: View {
     let context = CIContext()
     
     @State private var showingFilters = false
+    
+    @AppStorage("filterCount") var filterCount = 0
+    @Environment(\.requestReview) var requestReview
     
     var body: some View {
         NavigationStack {
@@ -51,7 +55,9 @@ struct ContentView: View {
 
                     Spacer()
 
-                    // share the picture
+                    if let processedImage {
+                        ShareLink(item: processedImage, preview: SharePreview("Instafilter image", image: processedImage))
+                    }
                 }
             }
             .padding([.horizontal, .bottom])
@@ -73,9 +79,15 @@ struct ContentView: View {
         showingFilters = true
     }
     
-    func setFilter(_ filter: CIFilter) {
+    @MainActor func setFilter(_ filter: CIFilter) {
         currentFilter = filter
         loadImage()
+        
+        filterCount += 1
+
+        if filterCount >= 20 {
+            requestReview()
+        }
     }
     
     func loadImage() {
