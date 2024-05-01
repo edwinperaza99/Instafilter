@@ -5,7 +5,7 @@ Instafilter is an engaging iOS application developed using SwiftUI, designed to 
 <div style="display: flex; justify-content: space-between;">
     <img src="screenshots/Instafilter_main.png" alt="Instafilter Main Screen" width="32%"/>
     <img src="screenshots/Instafilter_demo.png" alt="Image on Screen" width="32%"/>
-    <img src="screenshots/Instafilter_demo_2.png" alt="Applying Filter to Image" width="32%"/>
+    <img src="screenshots/Instafilter_demo_2.png" alt="Applying Sepia Filter to Image" width="32%"/>
 </div>
 
 ## Features
